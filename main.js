@@ -2,6 +2,8 @@ const stage = document.querySelector(".phone-stage");
 const hotspotButtons = document.querySelectorAll("[data-hotspot]");
 const closeFocusButton = document.querySelector(".focus-close");
 const fragmentCards = document.querySelectorAll(".fragment-card");
+const lightBeams = document.querySelectorAll(".light-beam");
+const transitionVideo = document.querySelector(".transition-video");
 const primaryAction = document.querySelector(".primary-action");
 const secondaryAction = document.querySelector(".secondary-action");
 const bottomTitle = document.querySelector(".bottom-card h2");
@@ -24,11 +26,35 @@ function setMode(mode) {
   stage.dataset.mode = mode;
 }
 
-function openLightFocus() {
+function enterLightFocus() {
+  lightBeams.forEach((beam) => {
+    beam.style.animation = "none";
+    beam.offsetHeight;
+    beam.style.animation = "";
+  });
+
   setMode("light");
 }
 
+function openLightFocus() {
+  if (!transitionVideo) {
+    enterLightFocus();
+    return;
+  }
+
+  setMode("transition");
+  transitionVideo.currentTime = 0;
+
+  const playback = transitionVideo.play();
+  if (playback) {
+    playback.catch(() => enterLightFocus());
+  }
+}
+
 function closeFocus() {
+  if (transitionVideo) {
+    transitionVideo.pause();
+  }
   setMode("default");
 }
 
@@ -41,8 +67,12 @@ function selectFragment(index) {
 
 function anchorSelectedLight() {
   const fragment = fragments[selectedFragmentIndex];
-  bottomTitle.textContent = fragment.step.replace("。", "，观察真实反馈");
-  roundButton.textContent = "选择本周现实回合";
+  if (bottomTitle) {
+    bottomTitle.textContent = fragment.step.replace("。", "，观察真实反馈");
+  }
+  if (roundButton) {
+    roundButton.textContent = "选择本周现实回合";
+  }
   closeFocus();
   stage.classList.add("has-anchored-light");
 }
@@ -76,6 +106,11 @@ fragmentCards.forEach((card, index) => {
 
 closeFocusButton.addEventListener("click", closeFocus);
 primaryAction.addEventListener("click", anchorSelectedLight);
+
+if (transitionVideo) {
+  transitionVideo.addEventListener("ended", enterLightFocus);
+  transitionVideo.addEventListener("error", enterLightFocus);
+}
 
 secondaryAction.addEventListener("click", () => {
   const fragment = fragments[selectedFragmentIndex];
