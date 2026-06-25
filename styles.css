@@ -1,0 +1,498 @@
+:root {
+  --gold: #ead99c;
+  --gold-strong: #fff1b8;
+  --ink: #f8f4ea;
+  --muted: rgba(248, 244, 234, 0.72);
+  --glass: rgba(16, 29, 42, 0.58);
+  --glass-soft: rgba(230, 236, 218, 0.12);
+  --line: rgba(245, 236, 200, 0.34);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  font-family:
+    "Songti SC", "Noto Serif SC", "STSong", "PingFang SC", "Microsoft YaHei",
+    serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #09111b;
+  color: var(--ink);
+}
+
+button {
+  border: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.app-shell {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(77, 111, 138, 0.2), transparent 38%),
+    linear-gradient(180deg, #08111d 0%, #05080d 100%);
+}
+
+.phone-stage {
+  position: relative;
+  width: min(100vw, 430px);
+  aspect-ratio: 9 / 16;
+  min-height: min(100vh, 760px);
+  max-height: calc(100vh - 40px);
+  overflow: hidden;
+  border-radius: 30px;
+  background: #09111b;
+  box-shadow: var(--shadow);
+  isolation: isolate;
+}
+
+.scene-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("./assets/mindfield-home-20260625.png");
+  background-position: center;
+  background-size: cover;
+  transform: scale(1);
+  transition:
+    transform 900ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    filter 900ms ease;
+}
+
+.scene-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(4, 10, 17, 0.18) 0%, transparent 28%, rgba(4, 7, 10, 0.48) 100%),
+    radial-gradient(circle at 48% 42%, transparent 0 28%, rgba(3, 7, 12, 0.28) 72%);
+}
+
+.scene-pulse {
+  position: absolute;
+  left: 55%;
+  top: 25%;
+  z-index: 2;
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 245, 184, 0.36), transparent 64%);
+  filter: blur(10px);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.72);
+  transition:
+    opacity 700ms ease,
+    transform 900ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.top-bar {
+  position: absolute;
+  top: max(24px, env(safe-area-inset-top));
+  left: 21px;
+  right: 21px;
+  z-index: 6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+}
+
+.top-bar > div {
+  width: 100%;
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.15;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 5;
+  border: 1px solid rgba(245, 236, 200, 0.36);
+  background: linear-gradient(120deg, rgba(229, 236, 220, 0.2), rgba(21, 36, 47, 0.48));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 12px 34px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition:
+    transform 280ms ease,
+    opacity 500ms ease,
+    border-color 280ms ease,
+    background 280ms ease;
+}
+
+.hotspot:active {
+  transform: scale(0.98);
+}
+
+.hotspot {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 22px;
+  align-items: center;
+  min-width: 0;
+  padding: 7px 8px 7px 9px;
+  border-radius: 20px;
+  text-align: left;
+}
+
+.hotspot-light {
+  top: 24.6%;
+  left: 53.5%;
+  width: 38.5%;
+}
+
+.hotspot-fog {
+  top: 48.2%;
+  right: 8.5%;
+  width: 34.5%;
+  opacity: 0.86;
+}
+
+.hotspot-entry {
+  top: 60.9%;
+  left: 7.5%;
+  width: 37.5%;
+}
+
+.orb {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 999px;
+  color: #fff6bc;
+  font-size: 20px;
+  background: radial-gradient(circle, rgba(255, 249, 190, 0.52), rgba(255, 249, 190, 0.08) 62%, transparent);
+  box-shadow: 0 0 30px rgba(255, 239, 156, 0.36);
+}
+
+.fog-orb {
+  background:
+    radial-gradient(circle at 35% 45%, rgba(220, 229, 235, 0.9), transparent 24%),
+    radial-gradient(circle at 58% 40%, rgba(197, 208, 216, 0.78), transparent 26%),
+    radial-gradient(circle at 50% 62%, rgba(180, 192, 202, 0.66), transparent 30%);
+  box-shadow: none;
+}
+
+.entry-orb::before {
+  content: "";
+  width: 11px;
+  height: 18px;
+  border: 2px solid rgba(255, 239, 168, 0.9);
+  border-left-width: 5px;
+}
+
+.hotspot-copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding-left: 7px;
+}
+
+.hotspot-copy strong {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.08;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hotspot-copy em {
+  overflow: hidden;
+  color: rgba(252, 247, 232, 0.78);
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  display: grid;
+  width: 21px;
+  height: 21px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(245, 236, 200, 0.22);
+  color: rgba(255, 250, 224, 0.9);
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.bottom-card {
+  position: absolute;
+  right: 25px;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: 25px;
+  z-index: 7;
+  min-height: 134px;
+  padding: 17px 16px 15px;
+  border: 1px solid rgba(239, 242, 233, 0.34);
+  border-radius: 19px;
+  background: rgba(9, 16, 24, 0.66);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(16px);
+}
+
+.bottom-card p {
+  margin: 0 0 9px;
+  color: rgba(242, 239, 227, 0.68);
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+}
+
+.bottom-card h2 {
+  margin: 0 38px 15px 0;
+  font-size: 19px;
+  font-weight: 520;
+  line-height: 1.42;
+  letter-spacing: 0;
+}
+
+.bottom-arrow {
+  position: absolute;
+  top: 44px;
+  right: 21px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 29px;
+}
+
+.round-button {
+  width: 100%;
+  min-height: 47px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 92% 34%, rgba(255, 255, 255, 0.78), transparent 3%),
+    linear-gradient(180deg, #f4e7aa, #cfb76a);
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.82),
+    0 0 24px rgba(244, 219, 128, 0.32);
+  color: #172330;
+  cursor: pointer;
+  font-size: 22px;
+  letter-spacing: 0;
+}
+
+.focus-panel {
+  position: absolute;
+  right: 21px;
+  bottom: 18px;
+  left: 21px;
+  z-index: 10;
+  padding: 17px 15px 15px;
+  border: 1px solid rgba(247, 235, 183, 0.48);
+  border-radius: 19px;
+  background: rgba(10, 18, 27, 0.78);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.52);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(22px);
+  transition:
+    opacity 360ms ease,
+    transform 460ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.focus-close {
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.focus-kicker {
+  margin: 0 0 7px;
+  color: rgba(235, 216, 151, 0.9);
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 11px;
+}
+
+.focus-panel h2 {
+  margin: 0 30px 8px 0;
+  font-size: 18px;
+  font-weight: 560;
+  line-height: 1.25;
+}
+
+.focus-body {
+  margin: 0 0 12px;
+  color: rgba(248, 244, 234, 0.72);
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.light-fragments {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.fragment-card {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(248, 238, 190, 0.18);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  text-align: left;
+}
+
+.fragment-card.is-selected {
+  border-color: rgba(250, 235, 168, 0.7);
+  background: rgba(237, 214, 139, 0.14);
+}
+
+.fragment-card span,
+.fragment-card em {
+  color: rgba(248, 244, 234, 0.62);
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 10px;
+  font-style: normal;
+}
+
+.fragment-card strong {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  font-weight: 620;
+}
+
+.focus-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 8px;
+}
+
+.secondary-action,
+.primary-action {
+  min-height: 37px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+}
+
+.secondary-action {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.primary-action {
+  background: linear-gradient(180deg, #f3e5a8, #d1bb72);
+  color: #142331;
+  font-weight: 650;
+}
+
+.phone-stage[data-mode="light"] .scene-layer {
+  filter: saturate(1.12) brightness(1.08);
+  transform: scale(1.075) translate(-2%, -2%);
+}
+
+.phone-stage[data-mode="light"] .scene-pulse {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.22);
+}
+
+.phone-stage[data-mode="light"] .hotspot-fog,
+.phone-stage[data-mode="light"] .hotspot-entry,
+.phone-stage[data-mode="light"] .bottom-card {
+  opacity: 0.24;
+}
+
+.phone-stage[data-mode="light"] .hotspot-light {
+  border-color: rgba(255, 244, 181, 0.88);
+  background: linear-gradient(120deg, rgba(255, 239, 160, 0.34), rgba(32, 52, 58, 0.52));
+  transform: translateY(-5px) scale(1.04);
+}
+
+.phone-stage[data-mode="light"] .focus-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+@media (max-width: 460px) {
+  .app-shell {
+    padding: 0;
+  }
+
+  .phone-stage {
+    width: 100vw;
+    min-height: 100vh;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .hotspot {
+    min-width: 0;
+  }
+
+  .hotspot-light {
+    left: 52%;
+    width: 40%;
+  }
+
+  .hotspot-fog {
+    right: 7%;
+    width: 35%;
+  }
+
+  .hotspot-entry {
+    width: 38%;
+  }
+}
+
+@media (max-width: 380px) {
+  .top-bar h1 {
+    font-size: 17px;
+  }
+
+  .hotspot {
+    grid-template-columns: 28px minmax(0, 1fr) 19px;
+    padding: 6px 7px;
+  }
+
+  .orb {
+    width: 27px;
+    height: 27px;
+    font-size: 18px;
+  }
+
+  .hotspot-copy strong {
+    font-size: 13px;
+  }
+
+  .hotspot-copy em {
+    font-size: 9px;
+  }
+}

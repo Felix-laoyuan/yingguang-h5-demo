@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>引光｜心象场首页 Demo</title>
+    <link rel="stylesheet" href="./styles.css?v=20260625-9" />
+  </head>
+  <body>
+    <main class="app-shell" aria-label="引光心象场首页">
+      <section class="phone-stage" data-mode="default">
+        <div class="scene-layer" aria-hidden="true"></div>
+        <div class="scene-vignette" aria-hidden="true"></div>
+        <div class="scene-pulse" aria-hidden="true"></div>
+
+        <header class="top-bar">
+          <div>
+            <h1>老源的心象场</h1>
+          </div>
+        </header>
+
+        <button class="hotspot hotspot-light is-active" type="button" data-hotspot="light" aria-label="查看引光">
+          <span class="orb">✦</span>
+          <span class="hotspot-copy">
+            <strong>引光</strong>
+            <em>你真正想靠近的方向</em>
+          </span>
+          <span class="chevron">›</span>
+        </button>
+
+        <button class="hotspot hotspot-fog" type="button" data-hotspot="fog" aria-label="查看雾墙">
+          <span class="orb fog-orb"></span>
+          <span class="hotspot-copy">
+            <strong>雾墙</strong>
+            <em>让你停在原地的预判</em>
+          </span>
+          <span class="chevron">›</span>
+        </button>
+
+        <button class="hotspot hotspot-entry" type="button" data-hotspot="entry" aria-label="进入现实入口">
+          <span class="orb entry-orb"></span>
+          <span class="hotspot-copy">
+            <strong>现实入口</strong>
+            <em>本周走出一小步</em>
+          </span>
+          <span class="chevron">›</span>
+        </button>
+
+        <section class="focus-panel" aria-live="polite">
+          <button class="focus-close" type="button" aria-label="关闭聚焦面板">×</button>
+          <p class="focus-kicker">心象场响应</p>
+          <h2>这束光正在指向你想靠近的方向</h2>
+          <p class="focus-body">
+            你不是没有想法，而是很多真正重要的事情一直被排在“以后再说”。先选中一束光，再把它变成本周能走出的一小步。
+          </p>
+          <div class="light-fragments" aria-label="引光碎片">
+            <button class="fragment-card is-selected" type="button">
+              <span>引光 01</span>
+              <strong>把自己的作品从脑子里拿出来</strong>
+              <em>用 30 分钟写出一个项目的一页说明。</em>
+            </button>
+            <button class="fragment-card" type="button">
+              <span>引光 02</span>
+              <strong>重新拿回一个不被打断的下午</strong>
+              <em>关掉非必要消息，完成一次完整思考。</em>
+            </button>
+          </div>
+          <div class="focus-actions">
+            <button class="secondary-action" type="button">编辑这束光</button>
+            <button class="primary-action" type="button">选择这束光</button>
+          </div>
+        </section>
+
+        <section class="bottom-card">
+          <button class="bottom-arrow" type="button" aria-label="展开本周现实取样">→</button>
+          <p>本周现实取样</p>
+          <h2>拒绝一个低优先级请求，观察真实反馈</h2>
+          <button class="round-button" type="button">开始本周回合</button>
+        </section>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
