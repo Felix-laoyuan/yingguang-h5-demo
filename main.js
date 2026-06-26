@@ -2,7 +2,8 @@ const stage = document.querySelector(".phone-stage");
 const hotspotButtons = document.querySelectorAll("[data-hotspot]");
 const closeFocusButton = document.querySelector(".focus-close");
 const fragmentCards = document.querySelectorAll(".fragment-card");
-const lightBeams = document.querySelectorAll(".light-beam");
+// Disabled: yellow split-light effect from 引光 icon.
+// const lightBeams = document.querySelectorAll(".light-beam");
 const transitionVideo = document.querySelector(".transition-video");
 const primaryAction = document.querySelector(".primary-action");
 const secondaryAction = document.querySelector(".secondary-action");
@@ -27,12 +28,6 @@ function setMode(mode) {
 }
 
 function enterLightFocus() {
-  lightBeams.forEach((beam) => {
-    beam.style.animation = "none";
-    beam.offsetHeight;
-    beam.style.animation = "";
-  });
-
   setMode("light");
 }
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>引光｜心象场首页 Demo</title>
-    <link rel="stylesheet" href="./styles.css?v=20260626-9" />
+    <link rel="stylesheet" href="./styles.css?v=20260626-10" />
   </head>
   <body>
     <main class="app-shell" aria-label="引光心象场首页">
@@ -16,24 +16,26 @@
         </div>
         <div class="scene-vignette" aria-hidden="true"></div>
         <div class="scene-pulse" aria-hidden="true"></div>
+        <!-- Disabled: yellow split-light effect from 引光 icon.
         <div class="light-beams" aria-hidden="true">
           <span class="light-beam beam-product"></span>
           <span class="light-beam beam-work"></span>
           <span class="light-beam beam-freedom"></span>
         </div>
+        -->
         <div class="star-map" aria-label="引光方向星图">
-          <button class="star-node star-product" type="button">
+          <div class="star-node star-product">
             <span class="star-core"></span>
             <span class="star-label">做一款自己喜欢的产品</span>
-          </button>
-          <button class="star-node star-work" type="button">
+          </div>
+          <div class="star-node star-work">
             <span class="star-core"></span>
             <span class="star-label">做自己心仪的工作</span>
-          </button>
-          <button class="star-node star-freedom" type="button">
+          </div>
+          <div class="star-node star-freedom">
             <span class="star-core"></span>
             <span class="star-label">拥有更自由的生活节奏</span>
-          </button>
+          </div>
         </div>
 
         <button class="hotspot hotspot-light is-active" type="button" data-hotspot="light" aria-label="查看引光">
